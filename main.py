@@ -1,5 +1,8 @@
 # print("Hello World")
-#
+# from sketchpy import library as lib
+# obj.rdj()
+# obj.pen.speed(1)
+# #
 # import turtle
 # turtle.speed(0)
 # turtle.pencolor("blue")
@@ -181,6 +184,6 @@ def main():
 
 
 # now call the main function to run the program code
-
-main()
+turtle.tracer(0,0)
+# main()
 
