@@ -1,7 +1,3 @@
-"""
-example
-"""
-
 import math
 import random
 import turtle as t
@@ -79,8 +75,12 @@ def genRaindropPos(r):
     Generate random position of the center of the raindrop with radius r
     so that the raindrop fits in the bounding box
     """
-    pos_x = random.randint(-MAX_COORDINATE() + PEN_SIZE() + r, MAX_COORDINATE() - PEN_SIZE() - r)
-    pos_y = random.randint(-MAX_COORDINATE() + PEN_SIZE() + r, MAX_COORDINATE() - PEN_SIZE() - r)
+    # Convert float values to integers for random.randint
+    min_coord = int(-MAX_COORDINATE() + PEN_SIZE() + r)
+    max_coord = int(MAX_COORDINATE() - PEN_SIZE() - r)
+
+    pos_x = random.randint(min_coord, max_coord)
+    pos_y = random.randint(min_coord, max_coord)
     return pos_x, pos_y
 
 
@@ -102,7 +102,8 @@ def genNRipples():
 
 def isRippleInside(x, y, r):
     """Determine if the ripple with center of (x, y) and radius of r fits in the drawn bounding box"""
-    return -MAX_COORDINATE() < x - r and x + r < MAX_COORDINATE() and -MAX_COORDINATE() < y - r and y + r < MAX_COORDINATE()
+    return (-MAX_COORDINATE() < x - r and x + r < MAX_COORDINATE() and
+            -MAX_COORDINATE() < y - r and y + r < MAX_COORDINATE())
 
 
 def drawOneRaindrop(x, y, r, n):
@@ -121,32 +122,29 @@ def drawOneRaindrop(x, y, r, n):
                      - turtle is facing north
                      - turtle is at position (x, y)
     """
-    t.setpos(x, y)
-    setRandomColor()
-    t.right(90)
-    t.forward(r)
-    t.left(90)
+    # Draw the filled circle
+    t.goto(x, y - r)  # Position turtle at the bottom of the circle
     t.down()
+    setRandomColor()
     t.begin_fill()
     t.circle(r)
     t.end_fill()
     t.up()
-    t.right(90)
-    t.backward(r)
-    t.left(90)
-    currentRippleRadius = 2 * r
-    while isRippleInside(x, y, currentRippleRadius) and n > 0:
-        t.right(90)
-        t.forward(currentRippleRadius)
-        t.left(90)
+
+    # Draw the ripples
+    current_ripple_radius = 2 * r
+    ripple_count = 0
+
+    while ripple_count < n and isRippleInside(x, y, current_ripple_radius):
+        t.goto(x, y - current_ripple_radius)  # Position turtle at the bottom of the ripple circle
         t.down()
-        t.circle(currentRippleRadius)
+        t.circle(current_ripple_radius)
         t.up()
-        t.right(90)
-        t.backward(currentRippleRadius)
-        t.left(90)
-        currentRippleRadius = currentRippleRadius + r
-        n = n - 1
+        current_ripple_radius += r
+        ripple_count += 1
+
+    # Return to the center of the raindrop
+    t.goto(x, y)
 
 
 def drawRaindrops(numRaindrops):
@@ -180,12 +178,14 @@ def main():
     if not 1 <= nRaindrops <= MAX_RAINDROPS():
         print("The number of raindrops must be between 1 and 100 inclusive")
     else:
+        t.speed(0)
         initialize()
         drawBorder()
-        sum = drawRaindrops(nRaindrops)
-        t.setpos(0, 0)
-        print("The total area of the raindrops is", sum, "square units", sep=' ')
+        total_area = drawRaindrops(nRaindrops)
+        t.goto(0, 0)
+        print("The total area of the raindrops is", total_area, "square units")
         t.done()
 
 
-main()
+if __name__ == "__main__":
+    main()
