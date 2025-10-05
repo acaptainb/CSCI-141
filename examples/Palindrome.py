@@ -1,30 +1,72 @@
-def is_palindrome(word):
-    """
-    A boolean function that iteratively tests whether a word is a palindrome
-    or not.
-    :param word: the word
-    :return: whether it is a palindrome or not
-    """
-    return False
+import turtle as t
 
-def is_palindrome_rec(word):
+def draw_iter(n, r,c):
     """
-    A boolean function that recursively tests whether a word is a palindrome
-    or not.
-    :param word: the word
-    :return: whether it is a palindrome or not
-    """
-    return False
+    Draws a raindrop with n ripples.
+    The first (center) circle is filled, rest are not.
 
-def main():
+    Returns total circumference of all ripple rings excluding center.
     """
-    Prompt the user to enter a word and detect whether it is a palindrome
-    or not.
-    :return: None
-    """
-    word = input('Enter a word: ')
-    print('Is ' + word + ' a palindrome?', is_palindrome(word))
-    print('Is ' + word + ' a palindrome?', is_palindrome_rec(word))
+    circle = 0
+    rad =r
+    first_circle = n
+    while n >= 1:
+        if n== first_circle:
+            t.fillcolor(c)
+            t.begin_fill()
+            t.circle(rad)
+            t.end_fill()
+        else:
+            t.circle(rad)
+            circle+= 2 * 3.1415 * rad
+        t.penup()
+        t.right(90)
+        t.forward(r)
+        t.pendown()
+        t.left(90)
+        rad+=r
+        n=n-1
+    return circle
 
-if __name__ == '__main__':
-    main()
+def draw_hex(n, l,c):
+    """
+    Draws a raindrop with n ripples.
+    The first (center) circle is filled, rest are not.
+
+    Returns total circumference of all ripple rings excluding center.
+    """
+    hex= 0
+    lenght=l
+    first_hex = n
+    while n >= 1:
+        if n== first_hex:
+            t.fillcolor(c)
+            t.begin_fill()
+            for i in range(6):
+                t.forward(lenght)
+                t.right(60)
+            t.end_fill()
+        else:
+            # t.circle(lenght)
+            for i in range(6):
+                t.forward(lenght/3)
+                t.right(60)
+            hex+= 2 * 3.1415 * lenght
+        t.penup()
+        t.right(90)
+        t.forward(l)
+        t.pendown()
+        t.left(90)
+        lenght+=l
+        n=n-1
+    return hex
+
+hex=draw_hex(2,50,"red")
+print(hex)
+
+# def main():
+#     draw_iter(3,10,"blue")
+
+
+# if __name__ == '__main__':
+    # main()

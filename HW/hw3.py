@@ -30,7 +30,7 @@ def draw(level, sz):
         draw( level - 1, sz/2)
         turtle.back(2 * sz)
         turtle.circle(sz)
-
+draw(2,100)
 def draw_color(level, sz, pc):
     #same draw function but each circle's pencolor changes from red to blue
     if level == 0:
@@ -58,6 +58,6 @@ def compute(n, a):
 
 
 if __name__ == "__main__":
-    draw_color(2, 100, 'blue')
+    # draw_color(2, 100, 'blue')
     # draw(4, 50)
     turtle.done()

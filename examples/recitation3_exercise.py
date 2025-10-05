@@ -67,15 +67,32 @@ def draw_shapes(length, depth):
         draw_shapes(length/2, depth-1)
         turtle.left(120)
 
+def draw_polygon(sides, length):
+    for _ in range(sides):
+        turtle.forward(length)
+        turtle.left(360/sides)
+
+def draw_shapesss(length, depth):
+    if depth == 1:
+        set_color(depth)
+        draw_polygon(6, length/3)   # base case = hexagon
+    else:
+        for _ in range(3):          # 3 sides = triangle
+            set_color(depth)
+            turtle.forward(length)
+            draw_shapes(length/2, depth-1)   # put a smaller triangle at this corner
+            turtle.left(120)
+draw_polygon(6, 100)
+
 def main():
     """
     The main program prompts for the depth and then calls the recursive
     drawing function, draw_shapes, to draw the complete image.
     """
     depth = int(input('Enter depth: '))
-    init(depth)
+    # init(depth)
     turtle.tracer(0,0)
-    draw_shapes(300, depth)
+    # draw_shapesss(200, depth)
     turtle.done()
 
 if __name__ == '__main__':
