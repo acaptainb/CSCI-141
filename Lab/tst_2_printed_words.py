@@ -23,7 +23,7 @@ def testZ():
 
     # read in the words
     print('Testing with z.txt...')
-    words = text_stats.readWordFile('z.txt')
+    words = text_stats.readWordFile(r"C:/Users\acapt\OneDrive\Desktop\CSCI 141\Lab\data\z.txt")
 
     # get the list of words for each year
     wordsByYearList = text_stats.printedWords(words)

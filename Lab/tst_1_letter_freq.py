@@ -22,7 +22,7 @@ def testA():
     
 
     print('Testing with a.txt...\n')
-    words = text_stats.readWordFile('/data/a.txt')
+    words = text_stats.readWordFile(r"C:/Users\acapt\OneDrive\Desktop\CSCI 141\Lab\data\a.txt")
 
     # test totalOccurrences
     for word in WORD_OCCURRENCES:
