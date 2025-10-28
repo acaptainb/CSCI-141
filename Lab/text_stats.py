@@ -10,6 +10,8 @@ def readWordFile(filename):
             else:
                 main_dict[q][int(w[0])] = int(w[1])
     return main_dict
+
+
 # print(readWordFile(r"C:/Users\acapt\OneDrive\Desktop\CSCI 141\Lab\data\very_short.txt"))
 def totalOccurrences(word, data):
     total =0

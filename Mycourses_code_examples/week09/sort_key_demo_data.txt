@@ -1,5 +1,0 @@
-Name, Age, Weight
-Frank, 42, 165
-Sam, 35, 150
-John, 15, 190
-Abby, 72, 100
