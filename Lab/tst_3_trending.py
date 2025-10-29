@@ -31,7 +31,7 @@ def testA():
               (1981, 2008, -2, 'antisera'))
               
     print('Testing with a.txt...\n')
-    words = text_stats.readWordFile('a.txt')
+    words = text_stats.readWordFile(r'C:/Users\acapt\OneDrive\Desktop\CSCI 141\Lab\data\a.txt')
 
     for idx in range(len(TRENDS)):
         print("testing: ",TRENDS[idx][0], "to", TRENDS[idx][1])

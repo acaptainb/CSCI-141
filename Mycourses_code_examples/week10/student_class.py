@@ -6,10 +6,12 @@ DATA_FILE = current_file_path + "/student_data.csv"
 
 class Student:
     __slots__ = ('name','id','major','credits')
-    name: str
-    id: int
-    major: str
-    credits: int
+
+    
+    # name: str
+    # id: int
+    # major: str
+    # credits: int
 
     def __init__(self, name:str, id:int, major:str):
         self.name = name
