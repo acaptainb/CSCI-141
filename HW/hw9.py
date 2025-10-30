@@ -5,7 +5,7 @@ CSCI-141 Homework 9
 '''
 
 from dataclasses import dataclass
-
+ 
 @dataclass
 class Animal:
     species: str
@@ -17,17 +17,29 @@ class Airplane:
     max_pass: int
     passengers: int
 
-    def __init__(self, passengers, max_pass, inflight):
+    def __init__(self, max_pass):
         self.max_pass = max_pass
-        self.passengers = passengers
-        self.inflight = inflight
+        self.passengers = 0
+        self.inflight = False
 
     def load(self, newpass: int):
-        pass
-    def takeoff(self):  
-        pass
+        if self.passengers+ newpass <= self.max_pass:
+            self.passengers+=newpass
+        else:
+            self.passengers = self.max_pass
 
-    # add your code here
+        return self.passengers
+    def takeoff(self):  
+        if self.inflight or self.passengers == 0 :
+            return False
+        else:
+            self.inflight = True
+            return True
+
+    def __str__(self):
+        return "Plane has " + str(self.passengers) + " out of " + \
+            str(self.max_pass) + " on board and is" + \
+            (" " if self.inflight else " not ") + "in flight"
 
 def most_legs(zoo):
     legs_list = [animal.legs for animal in zoo]
@@ -36,10 +48,6 @@ def most_legs(zoo):
         if animal.legs == most_legs_num:
             return animal.species
 
-    def __str__(self):
-        return "Plane has " + str(self.passengers) + " out of " + \
-            str(self.max_pass) + " on board and is" + \
-            (" " if self.inflight else " not ") + "in flight"
 
 def plane_test():
     plane = Airplane(120)
